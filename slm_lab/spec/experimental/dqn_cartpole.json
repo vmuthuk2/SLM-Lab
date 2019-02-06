@@ -63,7 +63,7 @@
       "eval_frequency": 1000,
       "max_tick_unit": "total_t",
       "max_session": 4,
-      "max_trial": 48,
+      "max_trial": 95,
       "search": "RandomSearch"
     },
     "search": {
@@ -76,7 +76,7 @@
         "net": {
           "hid_layers_activation__choice": ["relu", "selu", "tanh"],
           "optim_spec": {
-            "lr__choice": [0.001, 0.005, 0.01, 0.05]
+            "lr__uniform": [0.005, 0.05]
           }
         }
       }]
@@ -146,7 +146,7 @@
       "eval_frequency": 1000,
       "max_tick_unit": "total_t",
       "max_session": 4,
-      "max_trial": 48,
+      "max_trial": 95,
       "search": "RandomSearch"
     },
     "search": {
@@ -159,7 +159,7 @@
         "net": {
           "hid_layers_activation__choice": ["relu", "selu", "tanh"],
           "optim_spec": {
-            "lr__choice": [0.001, 0.005, 0.01, 0.05]
+            "lr__uniform": [0.005, 0.05]
           }
         }
       }]
