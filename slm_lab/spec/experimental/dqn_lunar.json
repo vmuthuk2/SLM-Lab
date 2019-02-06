@@ -1,0 +1,170 @@
+{
+  "dqn_boltzmann_lunar": {
+    "agent": [{
+      "name": "DQN",
+      "algorithm": {
+        "name": "DQN",
+        "action_pdtype": "Categorical",
+        "action_policy": "boltzmann",
+        "explore_var_spec": {
+          "name": "linear_decay",
+          "start_val": 3.0,
+          "end_val": 1.0,
+          "start_step": 0,
+          "end_step": 40000,
+        },
+        "gamma": 0.99,
+        "training_batch_epoch": 4,
+        "training_epoch": 4,
+        "training_frequency": 4,
+        "training_start_step": 32,
+        "normalize_state": false
+      },
+      "memory": {
+        "name": "Replay",
+        "batch_size": 64,
+        "max_size": 100000,
+        "use_cer": false
+      },
+      "net": {
+        "type": "MLPNet",
+        "hid_layers": [32],
+        "hid_layers_activation": "relu",
+        "clip_grad_val": null,
+        "loss_spec": {
+          "name": "MSELoss"
+        },
+        "optim_spec": {
+          "name": "Adam",
+          "lr": 0.02
+        },
+        "lr_scheduler_spec": {
+          "name": "MultiStepLR",
+          "milestones": [70000],
+          "gamma": 0.5,
+        },
+        "update_type": "polyak",
+        "update_frequency": 200,
+        "polyak_coef": 0.99,
+        "gpu": false
+      }
+    }],
+    "env": [{
+      "name": "LunarLander-v2",
+      "max_t": null,
+      "max_tick": 300000
+    }],
+    "body": {
+      "product": "outer",
+      "num": 1
+    },
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "max_tick_unit": "total_t",
+      "max_session": 4,
+      "max_trial": 95,
+      "search": "RandomSearch"
+    },
+    "search": {
+      "agent": [{
+        "algorithm": {
+          "explore_var_spec": {
+            "end_step__choice": [10000, 20000, 30000, 40000],
+            "hid_layers__choice": [[256], [128, 64], [256, 128], [400, 200]],
+          }
+        },
+        "net": {
+          "optim_spec": {
+            "lr__uniform": [0.002, 0.008],
+            "update_type__choice": ["replace", "polyak"]
+          }
+        }
+      }]
+    }
+  },
+  "dqn_epsilon_greedy_lunar": {
+    "agent": [{
+      "name": "DQN",
+      "algorithm": {
+        "name": "DQN",
+        "action_pdtype": "Argmax",
+        "action_policy": "epsilon_greedy",
+        "explore_var_spec": {
+          "name": "linear_decay",
+          "start_val": 1.0,
+          "end_val": 0.08,
+          "start_step": 0,
+          "end_step": 40000,
+        },
+        "gamma": 0.99,
+        "training_batch_epoch": 4,
+        "training_epoch": 4,
+        "training_frequency": 4,
+        "training_start_step": 32,
+        "normalize_state": false
+      },
+      "memory": {
+        "name": "Replay",
+        "batch_size": 64,
+        "max_size": 100000,
+        "use_cer": false
+      },
+      "net": {
+        "type": "MLPNet",
+        "hid_layers": [32],
+        "hid_layers_activation": "relu",
+        "clip_grad_val": null,
+        "loss_spec": {
+          "name": "MSELoss"
+        },
+        "optim_spec": {
+          "name": "Adam",
+          "lr": 0.02
+        },
+        "lr_scheduler_spec": {
+          "name": "MultiStepLR",
+          "milestones": [70000],
+          "gamma": 0.5,
+        },
+        "update_type": "polyak",
+        "update_frequency": 200,
+        "polyak_coef": 0.99,
+        "gpu": false
+      }
+    }],
+    "env": [{
+      "name": "LunarLander-v2",
+      "max_t": null,
+      "max_tick": 300000
+    }],
+    "body": {
+      "product": "outer",
+      "num": 1
+    },
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "max_tick_unit": "total_t",
+      "max_session": 4,
+      "max_trial": 95,
+      "search": "RandomSearch"
+    },
+    "search": {
+      "agent": [{
+        "algorithm": {
+          "explore_var_spec": {
+            "end_step__choice": [10000, 20000, 30000, 40000],
+            "hid_layers__choice": [[256], [128, 64], [256, 128], [400, 200]],
+          }
+        },
+        "net": {
+          "optim_spec": {
+            "lr__uniform": [0.002, 0.008],
+            "update_type__choice": ["replace", "polyak"]
+          }
+        }
+      }]
+    }
+  },
+}
