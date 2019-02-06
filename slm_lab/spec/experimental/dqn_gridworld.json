@@ -64,7 +64,11 @@
       "max_tick_unit": "total_t",
       "max_session": 4,
       "max_trial": 95,
-      "search": "RandomSearch"
+      "search": "RandomSearch",
+      "resources": {
+        "num_cpus": 25,
+        "num_gpus": 0
+      }
     },
     "search": {
       "agent": [{
@@ -148,7 +152,11 @@
       "max_tick_unit": "total_t",
       "max_session": 4,
       "max_trial": 95,
-      "search": "RandomSearch"
+      "search": "RandomSearch",
+      "resources": {
+        "num_cpus": 25,
+        "num_gpus": 0
+      }
     },
     "search": {
       "agent": [{
