@@ -76,9 +76,9 @@
         },
         "net": {
           "optim_spec": {
-            "lr__uniform": [0.002, 0.008],
-            "update_type__choice": ["replace", "polyak"]
-          }
+            "lr__uniform": [0.002, 0.008]
+          },
+          "update_type__choice": ["replace", "polyak"]
         }
       }]
     }
@@ -160,9 +160,9 @@
         },
         "net": {
           "optim_spec": {
-            "lr__uniform": [0.002, 0.008],
-            "update_type__choice": ["replace", "polyak"]
-          }
+            "lr__uniform": [0.002, 0.008]
+          },
+          "update_type__choice": ["replace", "polyak"]
         }
       }]
     }
