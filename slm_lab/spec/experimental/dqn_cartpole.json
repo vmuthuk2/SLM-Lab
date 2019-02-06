@@ -1,0 +1,168 @@
+{
+  "dqn_boltzmann_cartpole": {
+    "agent": [{
+      "name": "DQN",
+      "algorithm": {
+        "name": "DQN",
+        "action_pdtype": "Categorical",
+        "action_policy": "boltzmann",
+        "explore_var_spec": {
+          "name": "linear_decay",
+          "start_val": 3.0,
+          "end_val": 1.0,
+          "start_step": 0,
+          "end_step": 2000,
+        },
+        "gamma": 0.99,
+        "training_batch_epoch": 1,
+        "training_epoch": 4,
+        "training_frequency": 4,
+        "training_start_step": 32,
+        "normalize_state": false
+      },
+      "memory": {
+        "name": "Replay",
+        "batch_size": 32,
+        "max_size": 10000,
+        "use_cer": false
+      },
+      "net": {
+        "type": "MLPNet",
+        "hid_layers": [32],
+        "hid_layers_activation": "relu",
+        "clip_grad_val": null,
+        "loss_spec": {
+          "name": "MSELoss"
+        },
+        "optim_spec": {
+          "name": "Adam",
+          "lr": 0.02
+        },
+        "lr_scheduler_spec": {
+          "name": "StepLR",
+          "step_size": 1000,
+          "gamma": 0.9,
+        },
+        "update_type": "polyak",
+        "update_frequency": 1000,
+        "polyak_coef": 0.9,
+        "gpu": false
+      }
+    }],
+    "env": [{
+      "name": "CartPole-v0",
+      "max_t": null,
+      "max_tick": 50000,
+    }],
+    "body": {
+      "product": "outer",
+      "num": 1
+    },
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "max_tick_unit": "total_t",
+      "max_session": 4,
+      "max_trial": 48,
+      "search": "RandomSearch"
+    },
+    "search": {
+      "agent": [{
+        "algorithm": {
+          "explore_var_spec": {
+            "end_step__choice": [1000, 5000, 10000],
+          }
+        },
+        "net": {
+          "hid_layers_activation__choice": ["relu", "selu", "tanh"],
+          "optim_spec": {
+            "lr__choice": [0.001, 0.005, 0.01, 0.05]
+          }
+        }
+      }]
+    }
+  },
+  "dqn_epsilon_greedy_cartpole": {
+    "agent": [{
+      "name": "DQN",
+      "algorithm": {
+        "name": "DQN",
+        "action_pdtype": "Argmax",
+        "action_policy": "epsilon_greedy",
+        "explore_var_spec": {
+          "name": "linear_decay",
+          "start_val": 1.0,
+          "end_val": 0.1,
+          "start_step": 0,
+          "end_step": 2000,
+        },
+        "gamma": 0.99,
+        "training_batch_epoch": 1,
+        "training_epoch": 4,
+        "training_frequency": 4,
+        "training_start_step": 32,
+        "normalize_state": false
+      },
+      "memory": {
+        "name": "Replay",
+        "batch_size": 32,
+        "max_size": 10000,
+        "use_cer": false
+      },
+      "net": {
+        "type": "MLPNet",
+        "hid_layers": [32],
+        "hid_layers_activation": "relu",
+        "clip_grad_val": null,
+        "loss_spec": {
+          "name": "MSELoss"
+        },
+        "optim_spec": {
+          "name": "Adam",
+          "lr": 0.02
+        },
+        "lr_scheduler_spec": {
+          "name": "StepLR",
+          "step_size": 1000,
+          "gamma": 0.9,
+        },
+        "update_type": "polyak",
+        "update_frequency": 1000,
+        "polyak_coef": 0.9,
+        "gpu": false
+      }
+    }],
+    "env": [{
+      "name": "CartPole-v0",
+      "max_t": null,
+      "max_tick": 50000,
+    }],
+    "body": {
+      "product": "outer",
+      "num": 1
+    },
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "max_tick_unit": "total_t",
+      "max_session": 4,
+      "max_trial": 48,
+      "search": "RandomSearch"
+    },
+    "search": {
+      "agent": [{
+        "algorithm": {
+          "explore_var_spec": {
+            "end_step__choice": [1000, 5000, 10000],
+          }
+        },
+        "net": {
+          "hid_layers_activation__choice": ["relu", "selu", "tanh"],
+          "optim_spec": {
+            "lr__choice": [0.001, 0.005, 0.01, 0.05]
+          }
+        }
+      }]
+    }
+  },
+}
