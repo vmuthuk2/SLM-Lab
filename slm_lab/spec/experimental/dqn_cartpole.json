@@ -60,7 +60,7 @@
     },
     "meta": {
       "distributed": false,
-      "eval_frequency": 1000,
+      "eval_frequency": 400,
       "max_tick_unit": "total_t",
       "max_session": 4,
       "max_trial": 95,
@@ -143,7 +143,7 @@
     },
     "meta": {
       "distributed": false,
-      "eval_frequency": 1000,
+      "eval_frequency": 400,
       "max_tick_unit": "total_t",
       "max_session": 4,
       "max_trial": 95,
