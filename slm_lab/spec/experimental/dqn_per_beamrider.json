@@ -73,18 +73,18 @@
       "resources": {
         "num_cpus": 48
       },
-      "search": {
-        "agent": [{
-          "memory": {
-            "alpha__uniform": [0.1, 0.9],
+    },
+    "search": {
+      "agent": [{
+        "memory": {
+          "alpha__uniform": [0.1, 0.9],
+        },
+        "net": {
+          "optim_spec": {
+            "lr__uniform": [1e-5, 1e-4],
           },
-          "net": {
-            "optim_spec": {
-              "lr__uniform": [1e-5, 1e-4],
-            },
-          }
-        }]
-      }
+        }
+      }]
     }
   }
 }
