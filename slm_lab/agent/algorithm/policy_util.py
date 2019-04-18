@@ -27,7 +27,7 @@ logger = logger.get_logger(__name__)
 ACTION_PDS = {
     'continuous': ['Normal', 'Beta', 'Gumbel', 'LogNormal'],
     'multi_continuous': ['MultivariateNormal'],
-    'discrete': ['Categorical', 'Argmax', 'CategoricalCustom'],
+    'discrete': ['Categorical', 'Argmax', 'GumbelCategorical'],
     'multi_discrete': ['MultiCategorical'],
     'multi_binary': ['Bernoulli'],
 }
@@ -53,9 +53,14 @@ class Argmax(distributions.Categorical):
         super(Argmax, self).__init__(probs=probs, logits=logits, validate_args=validate_args)
 
 
-class CategoricalCustom(distributions.Categorical):
+class GumbelCategorical(distributions.Categorical):
+    '''
+    Special Categorical using Gumbel distribution to simulate softmax categorical for discrete action.
+    Similar to OpenAI's https://github.com/openai/baselines/blob/98257ef8c9bd23a24a330731ae54ed086d9ce4a7/baselines/a2c/utils.py#L8-L10
+    Explanation http://amid.fish/assets/gumbel.html
+    '''
     def __init__(self, probs=None, logits=None, validate_args=None):
-        super(CategoricalCustom, self).__init__(probs=probs, logits=logits, validate_args=validate_args)
+        super(GumbelCategorical, self).__init__(probs=probs, logits=logits, validate_args=validate_args)
         self.raw_logits = logits
 
     def sample(self, sample_shape=torch.Size()):
@@ -116,7 +121,7 @@ class MultiCategorical(distributions.Categorical):
 
 setattr(distributions, 'Argmax', Argmax)
 setattr(distributions, 'MultiCategorical', MultiCategorical)
-setattr(distributions, 'CategoricalCustom', CategoricalCustom)
+setattr(distributions, 'GumbelCategorical', GumbelCategorical)
 
 
 # base methods
