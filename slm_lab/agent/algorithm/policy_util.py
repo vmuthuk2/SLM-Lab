@@ -59,6 +59,7 @@ class GumbelCategorical(distributions.Categorical):
     Similar to OpenAI's https://github.com/openai/baselines/blob/98257ef8c9bd23a24a330731ae54ed086d9ce4a7/baselines/a2c/utils.py#L8-L10
     Explanation http://amid.fish/assets/gumbel.html
     '''
+
     def sample(self, sample_shape=torch.Size()):
         '''Gumbel softmax sampling'''
         u = torch.empty(self.logits.size(), device=self.logits.device, dtype=self.logits.dtype).uniform_(0, 1)
@@ -118,7 +119,6 @@ class MultiCategorical(distributions.Categorical):
 setattr(distributions, 'Argmax', Argmax)
 setattr(distributions, 'GumbelCategorical', GumbelCategorical)
 setattr(distributions, 'MultiCategorical', MultiCategorical)
-setattr(distributions, 'GumbelCategorical', GumbelCategorical)
 
 
 # base methods

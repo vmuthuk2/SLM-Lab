@@ -225,9 +225,9 @@ def wrap_deepmind(env, episode_life=True, clip_rewards=True, stack_len=None):
         env = FireResetEnv(env)
     if clip_rewards:
         env = ClipRewardEnv(env)
+    env = TransformImage(env)
     if stack_len is not None:
         env = FrameStack(env, stack_len)
-    env = TransformImage(env)
     return env
 
 
